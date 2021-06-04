@@ -19,7 +19,7 @@ def fisheye_undistort_rectify_map(k1, k2, fx, fy, cx, cy, width, height):
 
 @click.command()
 @click.option("--input-image-dir", "-i", "input_image_dir_path", default=f"{SCRIPT_DIR}/image")
-@click.option("--intput-toml", "-i", "input_toml_path", default=f"{SCRIPT_DIR}/parameter.toml")
+@click.option("--intput-toml", "-t", "input_toml_path", default=f"{SCRIPT_DIR}/parameter.toml")
 @click.option("--output-image-dir", "-o", "output_image_dir_path", default=f"{SCRIPT_DIR}/output")
 def main(input_image_dir_path, input_toml_path, output_image_dir_path):
     input_image_dir_pathlib = Path(input_image_dir_path)
