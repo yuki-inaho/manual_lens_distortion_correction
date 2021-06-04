@@ -1,0 +1,4 @@
+click
+opencv-python
+cvui
+tqdm
