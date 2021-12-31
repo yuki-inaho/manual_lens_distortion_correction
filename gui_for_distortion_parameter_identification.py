@@ -21,15 +21,24 @@ def fisheye_undistort_rectify_map(k1, k2, fx, fy, cx, cy, width, height):
 @click.option("--input-image", "-i", "input_image_path", default=f"{SCRIPT_DIR}/image/rgb.jpg")
 @click.option("--output-toml", "-o", "output_toml_path", default=f"{SCRIPT_DIR}/parameter.toml")
 @click.option("--resize-rate", "-r", default=1.0)
-def main(input_image_path, output_toml_path, resize_rate):
+@click.option("--focal-length", "-f", default=900)
+@click.option("--k1-init", "-k1", default=0.0)
+@click.option("--k2-init", "-k2", default=0.0)
+def main(input_image_path, output_toml_path, resize_rate, focal_length, k1_init, k2_init):
     image = cv2.imread(input_image_path, cv2.IMREAD_COLOR)
     image_height, image_width = image.shape[:-1]
 
     distortion_param_to_map = partial(
-        fisheye_undistort_rectify_map, fx=900, fy=900, cx=image_width // 2, cy=image_height // 2, width=image_width, height=image_height
+        fisheye_undistort_rectify_map,
+        fx=focal_length,
+        fy=focal_length,
+        cx=image_width // 2,
+        cy=image_height // 2,
+        width=image_width,
+        height=image_height,
     )
-    k1 = [0.0]
-    k2 = [0.0]
+    k1 = [k1_init]
+    k2 = [k2_init]
 
     image_height_resized = int(image_height * resize_rate)
     image_width_resized = int(image_width * resize_rate)

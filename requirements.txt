@@ -2,3 +2,4 @@ click
 opencv-python
 cvui
 tqdm
+toml
